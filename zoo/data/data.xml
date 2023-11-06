@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+        <record id="fancy_feeding_zoo" model="zoo.zoo">
+            <field name="name">Fancy Feeding Zoo</field>
+            <field name="caretaker_count" eval="1"/>
+        </record>
+
+        <!-- Species -->
+        <record id="penguin" model="zoo.species">
+            <field name="name">Penguin</field>
+            <field name="enclosure_capacity">50</field>
+            <field name="feeding_time">10</field>
+            <field name="feeding_interval_number">12</field>
+            <field name="feeding_interval_type">hours</field>
+        </record>
+        <record id="crocodile" model="zoo.species">
+            <field name="name">Crocodile</field>
+            <field name="enclosure_capacity">5</field>
+            <field name="feeding_time">30</field>
+            <field name="feeding_interval_number">2</field>
+            <field name="feeding_interval_type">weeks</field>
+        </record>
+        <record id="lion" model="zoo.species">
+            <field name="name">Lion</field>
+            <field name="enclosure_capacity">5</field>
+            <field name="feeding_time">20</field>
+            <field name="feeding_interval_number">1</field>
+            <field name="feeding_interval_type">days</field>
+        </record>
+        <record id="meerkat" model="zoo.species">
+            <field name="name">Meerkat</field>
+            <field name="enclosure_capacity">100</field>
+            <field name="feeding_time">10</field>
+            <field name="feeding_interval_number">1</field>
+            <field name="feeding_interval_type">days</field>
+        </record>
+        <record id="bat" model="zoo.species">
+            <field name="name">Bat</field>
+            <field name="enclosure_capacity">1000</field>
+            <field name="feeding_time">60</field>
+            <field name="feeding_interval_number">12</field>
+            <field name="feeding_interval_type">hours</field>
+        </record>
+        <record id="elephant" model="zoo.species">
+            <field name="name">Elephant</field>
+            <field name="enclosure_capacity">5</field>
+            <field name="feeding_time">60</field>
+            <field name="feeding_interval_number">1</field>
+            <field name="feeding_interval_type">days</field>
+        </record>
+        <record id="flamingo" model="zoo.species">
+            <field name="name">Flamingo</field>
+            <field name="enclosure_capacity">20</field>
+            <field name="feeding_time">30</field>
+            <field name="feeding_interval_number">1</field>
+            <field name="feeding_interval_type">days</field>
+        </record>
+
+        <!-- Enclosures -->
+        <record id="penguin_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.penguin"/>
+        </record>
+        <record id="crocodile_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.crocodile"/>
+        </record>
+        <record id="lion_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.lion"/>
+        </record>
+        <record id="meerkat_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.meerkat"/>
+        </record>
+        <record id="bat_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.bat"/>
+        </record>
+        <record id="elephant_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.elephant"/>
+        </record>
+        <record id="flamingo_enclosure" model="zoo.enclosure">
+            <field name="zoo_id" ref="zoo.fancy_feeding_zoo"/>
+            <field name="species_id" ref="zoo.flamingo"/>
+        </record>
+    </data>
+</odoo>

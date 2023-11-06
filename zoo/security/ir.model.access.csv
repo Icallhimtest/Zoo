@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zoo_zoo,zoo.zoo,model_zoo_zoo,base.group_user,1,1,1,1
+access_zoo_enclosure,zoo.enclosure,model_zoo_enclosure,base.group_user,1,1,1,1
+access_zoo_species,zoo.species,model_zoo_species,base.group_user,1,1,1,1
+access_zoo_animal,zoo.animal,model_zoo_animal,base.group_user,1,1,1,1
