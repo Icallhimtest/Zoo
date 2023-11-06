@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <record id="action_species_show_animals" model="ir.actions.act_window">
+      <field name="name">Animals</field>
+      <field name="res_model">zoo.animal</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('species_id','=', active_id)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="species_list">
+      <field name="name">species list</field>
+      <field name="model">zoo.species</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="enclosure_capacity"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="species_form">
+      <field name="name">species form</field>
+      <field name="model">zoo.species</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button class="oe_stat_button" name="%(action_species_show_animals)d"
+                    type="action" icon="fa-paw">
+              <div class="o_stat_info">
+                <span class="o_stat_text">
+                  Animals
+                </span>
+              </div>
+            </button>
+          </header>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="enclosure_capacity"/>
+              <field name="feeding_time"/>
+              <field name="feeding_interval_number"/>
+              <field name="feeding_interval_type"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_species_tree">
+      <field name="name">Species</field>
+      <field name="res_model">zoo.species</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p>
+          Here, you manage the species in your zoo.
+        </p>
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_species" name="Species" parent="menu_root" sequence="20" action="action_species_tree"/>
+
+  </data>
+</odoo>

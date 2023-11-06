@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record id="action_zoo_show_enclosures" model="ir.actions.act_window">
+      <field name="name">Enclosures</field>
+      <field name="res_model">zoo.enclosure</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('zoo_id','=', active_id)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="zoo_list">
+      <field name="name">zoo list</field>
+      <field name="model">zoo.zoo</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="zoo_form">
+      <field name="name">zoo form</field>
+      <field name="model">zoo.zoo</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button class="oe_stat_button" name="87" type="action" icon="fa-table-cells-large">
+              <div class="o_stat_info">
+                <span class="o_stat_text">
+                  Enclosures
+                </span>
+              </div>
+            </button>
+            <button name="set_required_caretaker_count" type="object" string="Compute Required Caretakers"/>
+          </header>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="caretaker_count"/>
+              <field name="caretaker_work_hours"/>
+              <field name="total_caretaker_hours"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_zoo_tree">
+      <field name="name">Zoo</field>
+      <field name="res_model">zoo.zoo</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p>
+          Here, you manage your zoos.
+        </p>
+      </field>
+    </record>
+
+    <menuitem name="zoo" id="menu_root"/>
+    <menuitem id="menu_zoo" name="Zoo" parent="menu_root" sequence="99" action="action_zoo_tree"/>
+  </data>
+</odoo>

@@ -1,0 +1,61 @@
+<odoo>
+  <data>
+    <record id="action_enclosure_show_animals" model="ir.actions.act_window">
+      <field name="name">Animals</field>
+      <field name="res_model">zoo.animal</field>
+      <field name="view_mode">tree,form</field>
+      <field name="domain">[('enclosure_id','=', active_id)]</field>
+    </record>
+
+    <record model="ir.ui.view" id="enclosure_list">
+      <field name="name">enclosure list</field>
+      <field name="model">zoo.enclosure</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="enclosure_form">
+      <field name="name">enclosure form</field>
+      <field name="model">zoo.enclosure</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button class="oe_stat_button" name="%(action_enclosure_show_animals)d"
+                    type="action" icon="fa-paw">
+              <div class="o_stat_info">
+                <span class="o_stat_text">
+                  Animals
+                </span>
+              </div>
+            </button>
+          </header>
+          <sheet>
+            <group>
+              <field name="zoo_id"/>
+              <field name="species_id"/>
+              <field name="animal_count"/>
+              <field name="capacity"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_enclosure_tree">
+      <field name="name">Enclosures</field>
+      <field name="res_model">zoo.enclosure</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p>
+          Here, you manage the enclosures in your zoo.
+        </p>
+      </field>
+    </record>
+
+    <menuitem id="menu_enclosure" name="Enclosures" parent="menu_root" sequence="10" action="action_enclosure_tree"/>
+
+  </data>
+</odoo>

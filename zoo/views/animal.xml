@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="animal_list">
+      <field name="name">animal list</field>
+      <field name="model">zoo.animal</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="animal_form">
+      <field name="name">animal form</field>
+      <field name="model">zoo.animal</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <field name="status" widget="statusbar"/>
+          </header>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="species_id"/>
+              <field name="enclosure_id"/>
+              <field name="last_feeding_time"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_animal_tree">
+      <field name="name">Animals</field>
+      <field name="res_model">zoo.animal</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p>
+          Here, you manage the animals in your zoo.
+        </p>
+      </field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem id="menu_animal" name="Animals" parent="menu_root" sequence="30" action="action_animal_tree"/>
+
+  </data>
+</odoo>
