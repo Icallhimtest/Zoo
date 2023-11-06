@@ -4,6 +4,8 @@ import random
 from odoo import models, fields, api
 from datetime import timedelta
 
+import logging
+_logger = logging.getLogger(__name__)
 # order matters !
 ANIMAL_STATUS = [
     ('fed', 'Fed'),
@@ -28,7 +30,10 @@ class Animal(models.Model):
         now = fields.Datetime.now()
         for animal in self:
             species = animal.species_id
-            feeding_interval = timedelta({species.feeding_interval_type: species.feeding_interval_number})
+            if not species:
+                animal.status = False
+                continue
+            feeding_interval = timedelta(**{species.feeding_interval_type: species.feeding_interval_number})
             missed_feedings = int((now - animal.last_feeding_time) / feeding_interval)
             try:
                 animal.status = ANIMAL_STATUS[missed_feedings][0]
@@ -51,6 +56,7 @@ class Animal(models.Model):
                     random.choice('aeiou') +
                     random.choice('bcdfghjklmnpqrstvwz'))
 
+        size = self._populate_sizes[size]
         animals_created = self
         zoo = self.env['zoo.zoo'].search([])[0]
         species = self.env['zoo.species'].search([])
@@ -68,6 +74,8 @@ class Animal(models.Model):
                         'species_id': spec.id,
                         'enclosure_id': enclosure.id,
                     })
+                    if len(animals_created) % 1000 == 0:
+                        _logger.info("%s/%s animals created", len(animals_created), size)
 
         return animals_created
 
