@@ -66,7 +66,21 @@ class Animal(models.Model):
         species = self.env['zoo.species'].search([])
         while len(animals_created) < size:
             # create enclosures and animals until size is reached
-            pass
+            for spec in species:
+                enclosure = self.env['zoo.enclosure'].create({
+                    'zoo_id': zoo.id,
+                    'species_id': spec.id,
+                })
+                while enclosure.animal_count < enclosure.capacity:
+                    if len(animals_created) >= size:
+                        return animals_created
+                    animals_created |= self.create({
+                        'name': generate_name(),
+                        'species_id': spec.id,
+                        'enclosure_id': enclosure.id,
+                    })
+                    if len(animals_created) % 1000 == 0:
+                        _logger.info("%s/%s animals created", len(animals_created), size)
 
         return animals_created
 
