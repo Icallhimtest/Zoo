@@ -89,7 +89,31 @@ class Animal(models.Model):
 
     @api.model
     def _cron_compute_status(self):
-        self.search([])._compute_status()
+        # as we have lots of animals and few species we can batch by species
+        # to reduce the number of iterations & queries
+        for species in self.env['zoo.species'].search([]):
+            feeding_interval = timedelta(**{species.feeding_interval_type: species.feeding_interval_number})
+            fed_limit = fields.Datetime.now() - feeding_interval
+            hungry_limit = fields.Datetime.now() - 2 * feeding_interval
+            starving_limit = fields.Datetime.now() - 3 * feeding_interval
+            self.search([
+                ('species_id', '=', species.id),
+                ('last_feeding_time', '>', fed_limit),
+            ]).write({'status': 'fed'})
+            self.search([
+                ('species_id', '=', species.id),
+                ('last_feeding_time', '>', hungry_limit),
+                ('last_feeding_time', '<=', fed_limit),
+            ]).write({'status': 'hungry'})
+            self.search([
+                ('species_id', '=', species.id),
+                ('last_feeding_time', '>', starving_limit),
+                ('last_feeding_time', '<=', hungry_limit),
+            ]).write({'status': 'starving'})
+            self.search([
+                ('species_id', '=', species.id),
+                ('last_feeding_time', '<=', starving_limit),
+            ]).write({'status': 'dead'})
 
     @api.model
     def _get_next_animal_to_feed(self):
