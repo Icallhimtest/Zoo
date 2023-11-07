@@ -39,7 +39,7 @@ class Animal(models.Model):
             missed_feedings = int((now - animal.last_feeding_time) / feeding_interval)
             try:
                 animal.status = ANIMAL_STATUS[missed_feedings][0]
-            except KeyError:
+            except IndexError:
                 animal.status = ANIMAL_STATUS[-1][0]
 
     @property
