@@ -92,5 +92,17 @@
             <field name="enclosure_id" ref="zoo.penguin_enclosure"/>
             <field name="name">Happy Feet</field>
         </record>
+
+        <!-- crons -->
+        <record model="ir.cron" id="compute_animal_status">
+              <field name="name">Compute animal status</field>
+              <field name="model_id" ref="zoo.model_zoo_animal"/>
+              <field name="state">code</field>
+              <field name="code">model._cron_compute_status()</field>
+              <field name="interval_number">1</field>
+              <field name="interval_type">hours</field>
+              <field name="numbercall">-1</field>
+              <field name="doall" eval="False"/>
+        </record>
     </data>
 </odoo>

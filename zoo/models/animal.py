@@ -89,7 +89,7 @@ class Animal(models.Model):
 
     @api.model
     def _cron_compute_status(self):
-        pass
+        self.search([])._compute_status()
 
     @api.model
     def _get_next_animal_to_feed(self):
