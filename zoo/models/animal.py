@@ -22,7 +22,7 @@ class Animal(models.Model):
 
     name = fields.Char(required=True)
     species_id = fields.Many2one('zoo.species', 'Species', required=True)
-    enclosure_id = fields.Many2one('zoo.enclosure', 'Enclosure', required=True)
+    enclosure_id = fields.Many2one('zoo.enclosure', 'Enclosure', required=True, index=True)
     status = fields.Selection(ANIMAL_STATUS, compute='_compute_status', store=True)
     last_feeding_time = fields.Datetime(default=fields.Datetime.now(), required=True)
     next_feeding_time = fields.Datetime()
